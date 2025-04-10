@@ -1,6 +1,0 @@
-ervices:
-  - type: web
-    name: uc-bot-2
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn bot:app
