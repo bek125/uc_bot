@@ -1,4 +1,3 @@
-
 import telebot
 from telebot import types
 import json
@@ -6,14 +5,14 @@ from datetime import datetime
 import requests
 import pandas as pd
 import socket
-import os
 
-TOKEN = '7618485150:AAFdtCQkpwd572NYHt7CiHlRDzdbCa3pmlg'
+TOKEN = '7618485150:AAFdtCQkpwd572NYHt7CiHlRDzdbCa3pmlg'  # Bot tokeni
 bot = telebot.TeleBot(TOKEN)
+
+bot.remove_webhook()  # Webhookni o‘chirish, pollingni ishlatish uchun
 
 ADMIN_ID = 1382850686
 
-# UC variantlari
 uc_options = {
     '60 UC': '14,000 so‘m',
     '180 UC': '39,000 so‘m',
@@ -27,6 +26,7 @@ blacklist = set()
 
 ORDER_FILE = 'orders.json'
 
+# YANGI API KALITINI KIRITING
 API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJhY2I1YTc1MC1mNjY1LTAxM2QtZTdkYy0wNjFhOWQ1YjYxYWYiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNzQ0MDg5MDEyLCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6Ii05NWE5NTRlNS03YmQ1LTQ2YjktOTNmYy1jNGQ0ODYxYzg2MzcifQ.2tmUT7NRbzzzm8rs0DJmUfZmOCPp9mYSGxB_5TKaY_M'
 
 def save_orders():
@@ -84,11 +84,11 @@ def get_pubg_id(message):
         socket.gethostbyname("api.gamelockerapp.com")
         response = requests.get(url, headers=headers, timeout=10)
         if response.status_code != 200:
-            return bot.send_message(message.chat.id, "❌ PUBG ID topilmadi yoki noto‘g‘ri.")
+            return bot.send_message(message.chat.id, "❌ PUBG ID topilmadi yoki noto‘g‘ri. Iltimos, tekshirib qayta yuboring.")
     except socket.gaierror:
-        return bot.send_message(message.chat.id, "⚠️ DNS blokirovkasi aniqlangandi. VPN orqali urinib ko‘ring.")
+        return bot.send_message(message.chat.id, "⚠️ Tarmoq yoki DNS blokirovkasi aniqlangandi. VPN orqali urinib ko‘ring.")
     except requests.exceptions.RequestException:
-        return bot.send_message(message.chat.id, "⚠️ Tarmoq xatosi yuz berdi.")
+        return bot.send_message(message.chat.id, "⚠️ Tarmoq xatosi yuz berdi. Keyinroq urinib ko‘ring.")
 
     user_data[message.chat.id]['pubg_id'] = pubg_id
     uc = user_data[message.chat.id]['uc']
