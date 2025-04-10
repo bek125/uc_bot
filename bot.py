@@ -3,10 +3,12 @@ import telebot
 import os
 from dotenv import load_dotenv
 
-# .env fayldan tokenni yuklaymiz
+# --- .env faylni yuklash ---
 load_dotenv()
 
-API_TOKEN = os.getenv('BOT_TOKEN')  # Token .env fayldan olinadi
+API_TOKEN = os.getenv('API_TOKEN')
+WEBHOOK_URL = os.getenv('WEBHOOK_URL')
+
 bot = telebot.TeleBot(API_TOKEN)
 app = Flask(__name__)
 
@@ -29,5 +31,5 @@ def webhook():
 # --- Botni boshlash ---
 if __name__ == '__main__':
     bot.remove_webhook()
-    bot.set_webhook(url='https://uc-bot-2.onrender.com/')  # To'g'ri URL
-    app.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+    bot.set_webhook(url=WEBHOOK_URL)
+    app.run(host="0.0.0.0", port=5000)
