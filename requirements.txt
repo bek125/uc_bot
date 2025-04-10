@@ -1,4 +1,1 @@
-pytelegrambotapi
 flask
-python-dotenv
-gunicorn
