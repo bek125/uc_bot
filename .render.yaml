@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: your-bot-name
+    name: uc-bot-2
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn bot:app --bind 0.0.0.0:5000
+    startCommand: gunicorn bot:app
